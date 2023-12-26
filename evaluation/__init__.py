@@ -201,6 +201,8 @@ def test(args):
         print('>> Determining test accuracy')
         metrics = test_metrics(inn, dataset, args)
         results_dict = {'test_metrics': metrics}
+        print('>> Results dict (Lx, Ly, bitsperdim, accuracy)')
+        print(results_dict)
 
     if eval_calibration:
         print('>> Plotting calibration curve')
@@ -243,11 +245,6 @@ def test(args):
                 aucs[k] = float(v)
 
             results_dict[test_type] = aucs
-    print('>> Results dict (Lx, Ly, bitsperdim, accuracy)')
-    print(results_dict["L_x"])
-    print(results_dict["L_y"])
-    print(results_dict["bits_per_dim"])
-    print(results_dict["accuracy"])
 
     print('>> Saving figures')
     with PdfPages(fig_fname) as pp:
@@ -259,11 +256,3 @@ def test(args):
     if eval_test_acc and eval_calibration and eval_ood_detection:
         print('>> Generating data output files')
         output.to_json(results_dict, output_dir)
-        output.to_console(results_dict, output_dir)
-        output.to_latex_table_row(results_dict, output_dir,
-                                  name=args['checkpoints']['base_name'],
-                                  italic_ood=False,
-                                  blank_ood=(inn.feed_forward or inn.feed_forward_revnet),
-                                  italic_entrop=False,
-                                  blank_bitspdim=(inn.feed_forward or inn.feed_forward_revnet),
-                                  blank_classif=(eval(args['training']['beta_IB']) == 0))
