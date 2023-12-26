@@ -243,9 +243,11 @@ def test(args):
                 aucs[k] = float(v)
 
             results_dict[test_type] = aucs
-    print('>> Generating data output files')
-    output.to_json(results_dict, output_dir)
-    output.to_console(results_dict, output_dir)
+    print('>> Results dict (Lx, Ly, bitsperdim, accuracy)')
+    print(results_dict["L_x"])
+    print(results_dict["L_y"])
+    print(results_dict["bits_per_dim"])
+    print(results_dict["accuracy"])
 
     print('>> Saving figures')
     with PdfPages(fig_fname) as pp:
