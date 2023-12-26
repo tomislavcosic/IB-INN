@@ -243,6 +243,9 @@ def test(args):
                 aucs[k] = float(v)
 
             results_dict[test_type] = aucs
+    print('>> Generating data output files')
+    output.to_json(results_dict, output_dir)
+    output.to_console(results_dict, output_dir)
 
     print('>> Saving figures')
     with PdfPages(fig_fname) as pp:
