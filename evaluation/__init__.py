@@ -202,10 +202,7 @@ def test(args):
         metrics = test_metrics(inn, dataset, args)
         results_dict = {'test_metrics': metrics}
         print('>> Results dict (Lx, Ly, bitsperdim, accuracy)')
-        print(results_dict["L_x"])
-        print(results_dict["L_y"])
-        print(results_dict["bits_per_dim"])
-        print(results_dict["accuracy"])
+        print(results_dict)
 
     if eval_calibration:
         print('>> Plotting calibration curve')
